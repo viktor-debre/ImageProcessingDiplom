@@ -1,12 +1,11 @@
 ﻿using Emgu.CV;
+using ImageProcessingDiplom.Interfaces;
 
 namespace ImageProcessingDiplom.OpenCvServices
 {
-    public class HammingProvider
+    public class HammingProvider : IHammingProvider
     {
         private const int DESC_SIZE = 500;
-        private const double THRESHOLD_MATHES = 0.25f;
-        private const int BRISK_BYTE_COUNT = 512;
 
         public int[,] FindHammingDistance(Mat descriptors1, Mat descriptors2)
         {
@@ -22,13 +21,13 @@ namespace ImageProcessingDiplom.OpenCvServices
             return distances;
         }
 
-        private int FindHammingLenghtForDescriptors(byte[] descriptors1, byte[] descriptors2)
+        private int FindHammingLenghtForDescriptors(byte[] descriptor1, byte[] descriptor2)
         {
             int distance = 0;
 
-            for (int i = 0; i < descriptors1.Length; ++i)
+            for (int i = 0; i < descriptor1.Length; ++i)
             {
-                byte xorResult = (byte)(descriptors1[i] ^ descriptors2[i]);
+                byte xorResult = (byte)(descriptor1[i] ^ descriptor2[i]);
 
                 for (int j = 0; j < 8; j++)
                 {
@@ -40,25 +39,6 @@ namespace ImageProcessingDiplom.OpenCvServices
             }
 
             return distance;
-        }
-
-        public int CountThresholdMathes(int[,] distances)
-        {
-            int count = 0;
-
-            for (int i = 0; i < DESC_SIZE; i++)
-            {
-                for (int j = 0; j < DESC_SIZE; j++)
-                {
-                    if (distances[i,j] < BRISK_BYTE_COUNT * THRESHOLD_MATHES)
-                    {
-                        count++;
-                        break;
-                    }
-                }
-            }
-
-            return count;
         }
     }
 }

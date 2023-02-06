@@ -15,19 +15,14 @@ namespace ImageProcessingDiplom.OpenCvServices
 
         public BriskDetector(string filePath)
         {
-            // Load an image
             Mat image = CvInvoke.Imread(filePath, ImreadModes.Grayscale);
 
-            // Create the BRISK detector
             _detector = new Brisk();
 
-            // Detect keypoints
             VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
             _detector.DetectRaw(image, keypoints);
 
-            // Compute descriptors
             Mat descriptors = new Mat();
-
             _detector.Compute(image, keypoints, descriptors);
 
             Keypoints = keypoints;
