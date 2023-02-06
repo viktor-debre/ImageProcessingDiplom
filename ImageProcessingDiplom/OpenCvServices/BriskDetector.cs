@@ -16,7 +16,7 @@ namespace ImageProcessingDiplom.OpenCvServices
         public BriskDetector(string filePath)
         {
             // Load an image
-            Mat image = CvInvoke.Imread("D:\\repos\\diplom\\image1.png", ImreadModes.Grayscale);
+            Mat image = CvInvoke.Imread(filePath, ImreadModes.Grayscale);
 
             // Create the BRISK detector
             _detector = new Brisk();

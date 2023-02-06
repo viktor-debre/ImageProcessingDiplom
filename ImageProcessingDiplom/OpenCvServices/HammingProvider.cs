@@ -4,14 +4,16 @@ namespace ImageProcessingDiplom.OpenCvServices
 {
     public class HammingProvider
     {
-        private const int descSize = 500;
+        private const int DESC_SIZE = 500;
+        private const double THRESHOLD_MATHES = 0.25f;
+        private const int BRISK_BYTE_COUNT = 512;
 
         public int[,] FindHammingDistance(Mat descriptors1, Mat descriptors2)
         {
-            var distances = new int[descSize, descSize];
-            for (int i = 0; i < descSize; i++)
+            var distances = new int[DESC_SIZE, DESC_SIZE];
+            for (int i = 0; i < DESC_SIZE; i++)
             {
-                for (int j = 0; j < descSize; j++)
+                for (int j = 0; j < DESC_SIZE; j++)
                 {
                     distances[i, j] = FindHammingLenghtForDescriptors(descriptors1.GetRawData(i), (descriptors2.GetRawData(j)));
                 }
@@ -38,6 +40,25 @@ namespace ImageProcessingDiplom.OpenCvServices
             }
 
             return distance;
+        }
+
+        public int CountThresholdMathes(int[,] distances)
+        {
+            int count = 0;
+
+            for (int i = 0; i < DESC_SIZE; i++)
+            {
+                for (int j = 0; j < DESC_SIZE; j++)
+                {
+                    if (distances[i,j] < BRISK_BYTE_COUNT * THRESHOLD_MATHES)
+                    {
+                        count++;
+                        break;
+                    }
+                }
+            }
+
+            return count;
         }
     }
 }
