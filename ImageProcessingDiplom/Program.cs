@@ -121,26 +121,43 @@ Console.WriteLine("Medoid is descriptor number " + (medoidIndex3 + 1));
 
 List<byte[]> medoids = new List<byte[]>() { medoidDescriptor1, medoidDescriptor2, medoidDescriptor3 };
 
-//int minMedoid1 = _medoid.FindMinDistanceForMedoid(distances11, medoidIndex1);
-//int minMedoid2 = _medoid.FindMinDistanceForMedoid(distances22, medoidIndex2);
-//int minMedoid3 = _medoid.FindMinDistanceForMedoid(distances33, medoidIndex3);
-int minMedoid1 = _medoid.FindMinDistanceForMedoid(descriptors1.GetRawData(medoidIndex1));
-int minMedoid2 = _medoid.FindMinDistanceForMedoid(descriptors2.GetRawData(medoidIndex2));
-int minMedoid3 = _medoid.FindMinDistanceForMedoid(descriptors3.GetRawData(medoidIndex3));
+Console.WriteLine("min method");
+int minMedoid1 = _medoid.FindMinDistanceForMedoid(distances11, medoidIndex1);
+int minMedoid2 = _medoid.FindMinDistanceForMedoid(distances22, medoidIndex2);
+int minMedoid3 = _medoid.FindMinDistanceForMedoid(distances33, medoidIndex3);
+//int minMedoid1 = _medoid.FindMinDistanceForMedoid(descriptors1.GetRawData(medoidIndex1);
+//int minMedoid2 = _medoid.FindMinDistanceForMedoid(descriptors2.GetRawData(medoidIndex2));
+//int minMedoid3 = _medoid.FindMinDistanceForMedoid(descriptors3.GetRawData(medoidIndex3));
 
 List<int> minMedoidElements = new List<int>() { minMedoid1, minMedoid2, minMedoid3 };
 
-VoteResult voteResult2 = _medoid.TriangleMethod(descriptors4,medoids,minMedoidElements);
+VoteResult voteResult2 = _medoid.TriangleMethodMin(descriptors4,medoids,minMedoidElements);
 
 int index2 = 1;
 foreach (var item in voteResult2.results)
 {
-    var persent = FindPrecision(voteResult1.results[index2 - 1], item);
-    Console.WriteLine($"Mathes 4 image with {index2} etalon: {item} with precision: {persent}%");
+    //var persent = FindPrecision(voteResult1.results[index2 - 1], item);
+    Console.WriteLine($"Mathes 4 image with {index2} etalon: {item} with precision: %");
     index2++;
 }
 
+Console.WriteLine("max method");
+int maxMedoid1 = _medoid.FindMaxDistanceForMedoid(distances11, medoidIndex1);
+int maxMedoid2 = _medoid.FindMaxDistanceForMedoid(distances22, medoidIndex2);
+int maxMedoid3 = _medoid.FindMaxDistanceForMedoid(distances33, medoidIndex3);
 
+List<int> maxMedoidElements = new List<int>() { maxMedoid1, maxMedoid2, maxMedoid3 };
+
+VoteResult voteResult3 = _medoid.TriangleMethodMax(descriptors4, medoids, maxMedoidElements);
+
+int index3 = 1;
+
+foreach (var item in voteResult3.results)
+{
+    //var persent = FindPrecision(voteResult1.results[index3 - 1], item);
+    Console.WriteLine($"Mathes 4 image with {index3} etalon: {item} with precision: %");
+    index3++;
+}
 //var minDistanceIndex = _medoid.FindIndexOfMinDistance(distances11, medoidIndex);
 //var maxDstanceIndex = _medoid.FindIndexOfMaxDistance(distances11, medoidIndex);
 
@@ -167,15 +184,3 @@ results += "Medoid method time elapsed: " + stopwatch2.ElapsedMilliseconds + '\n
 Console.WriteLine("Medoid method time elapsed: " + stopwatch2.ElapsedMilliseconds);
 
 File.WriteAllText(projectPath + "\\results.txt", results);
-
-
-static int FindPrecision(int origin, int comparedValue)
-{
-    int precision = comparedValue * 100 / origin;
-    if(precision > 100)
-    {
-        precision = 100 - precision % 100;
-    }
-
-    return precision;
-}

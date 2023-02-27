@@ -10,14 +10,16 @@ namespace ImageProcessingDiplom.OpenCvServices
 
     public class HammingProvider : IHammingProvider
     {
-        private const int DESC_SIZE = 500;
+        private const int DESC_NUMBER = 500;
+        private const int DESC_SIZE = 512;
+        private const int THREADHOLD_DESC = DESC_SIZE / 8; 
 
         public int[,] FindHammingDistance(Mat descriptors1, Mat descriptors2)
         {
-            var distances = new int[DESC_SIZE, DESC_SIZE];
-            for (int i = 0; i < DESC_SIZE; i++)
+            var distances = new int[DESC_NUMBER, DESC_NUMBER];
+            for (int i = 0; i < DESC_NUMBER; i++)
             {
-                for (int j = 0; j < DESC_SIZE; j++)
+                for (int j = 0; j < DESC_NUMBER; j++)
                 {
                     distances[i, j] = FindHammingLenghtForDescriptors(descriptors1.GetRawData(i), (descriptors2.GetRawData(j)));
                 }
@@ -31,11 +33,11 @@ namespace ImageProcessingDiplom.OpenCvServices
             VoteResult results;
             results.results = new List<int>() { 0, 0, 0 };
 
-            for (int i = 0; i < DESC_SIZE; ++i)
+            for (int i = 0; i < DESC_NUMBER; ++i)
             {
                 var descriptor = descriptors.GetRawData(i);
 
-                var minDistance = 512;
+                var minDistance = DESC_SIZE;
                 var indexOfEtalonToVote = -1;
                 for (int j = 0; j < etalons.Count; ++j)
                 {
@@ -44,11 +46,11 @@ namespace ImageProcessingDiplom.OpenCvServices
                     {
                         minDistance = distance;
                         //Threshold
-                        //if (minDistance < 128)
-                        //{
-                        //    indexOfEtalonToVote = j;
-                        //}
-                        indexOfEtalonToVote = j;
+                        if (minDistance < THREADHOLD_DESC)
+                        {
+                            indexOfEtalonToVote = j;
+                        }
+                        //indexOfEtalonToVote = j;
                     }
                 }
                 if( indexOfEtalonToVote != -1)
@@ -62,8 +64,8 @@ namespace ImageProcessingDiplom.OpenCvServices
 
         private int FindMinHammingLenght(byte[] descriptor, Mat etalon)
         {
-            int minDistance = 512;
-            for (int k = 0; k < DESC_SIZE; ++k)
+            int minDistance = DESC_SIZE;
+            for (int k = 0; k < DESC_NUMBER; ++k)
             {
                 var distance = FindHammingLenghtForDescriptors(descriptor, etalon.GetRawData(k));
                 if(distance < minDistance)

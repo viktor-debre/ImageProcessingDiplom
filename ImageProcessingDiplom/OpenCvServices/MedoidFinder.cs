@@ -70,30 +70,49 @@ namespace ImageProcessingDiplom.OpenCvServices
             return minIndex;
         }
 
-        public int FindMinDistanceForMedoid(byte[] medoid/*int[,] distances, int medoidIndex*/)
+        public int FindMinDistanceForMedoid(/*byte[] medoid*/int[,] distances, int medoidIndex)
         {
             int minValue = int.MaxValue;
-            //for (int i = 0; i < distances.GetLength(1); i++)
-            //{
-            //    if (distances[medoidIndex, i] < minValue && distances[medoidIndex, i] != 0)
-            //    {
-            //        minValue = distances[medoidIndex, i];
-            //    }
-            //}
-            for (int i = 0; i < medoid.Length; i++)
+            for (int i = 0; i < distances.GetLength(1); i++)
             {
-                if (medoid[i] < minValue && medoid[i] != 0)
+                if (distances[medoidIndex, i] < minValue && distances[medoidIndex, i] != 0)
                 {
-                    minValue = medoid[i];
+                    minValue = distances[medoidIndex, i];
                 }
             }
+            //for (int i = 0; i < medoid.Length; i++)
+            //{
+            //    if (medoid[i] < minValue && medoid[i] != 0)
+            //    {
+            //        minValue = medoid[i];
+            //    }
+            //}
 
             return minValue;
         }
 
+        public int FindMaxDistanceForMedoid(/*byte[] medoid*/int[,] distances, int medoidIndex)
+        {
+            int maxValue = int.MinValue;
+            for (int i = 0; i < distances.GetLength(1); i++)
+            {
+                if (distances[medoidIndex, i] > maxValue && distances[medoidIndex, i] != 0)
+                {
+                    maxValue = distances[medoidIndex, i];
+                }
+            }
+            //for (int i = 0; i < medoid.Length; i++)
+            //{
+            //    if (medoid[i] < minValue && medoid[i] != 0)
+            //    {
+            //        minValue = medoid[i];
+            //    }
+            //}
 
+            return maxValue;
+        }
 
-        public VoteResult TriangleMethod(Mat descriptors, List<byte[]> medoids, List<int> medoidMinElements)
+        public VoteResult TriangleMethodMin(Mat descriptors, List<byte[]> medoids, List<int> medoidMinElements)
         {
             VoteResult results;
             results.results = new List<int>() { 0, 0, 0 };
@@ -110,7 +129,7 @@ namespace ImageProcessingDiplom.OpenCvServices
                     int Bi = _hamming.FindHammingLenghtForDescriptors(medoids[i], descriptor);
 
                     int value = Ci + Bi;
-                    if(value < minVote )
+                    if (value < minVote)
                     {
                         minVote = value;
                         minIndex = i;
@@ -118,6 +137,36 @@ namespace ImageProcessingDiplom.OpenCvServices
                 }
 
                 results.results[minIndex] += 1;
+            }
+
+            return results;
+        }
+
+        public VoteResult TriangleMethodMax(Mat descriptors, List<byte[]> medoids, List<int> medoidMaxElements)
+        {
+            VoteResult results;
+            results.results = new List<int>() { 0, 0, 0 };
+
+            for (int j = 0; j < 500; j++)
+            {
+                var descriptor = descriptors.GetRawData(j);
+
+                int maxVote = int.MinValue;
+                int maxIndex = 0;
+                for (int i = 0; i < medoids.Count; i++)
+                {
+                    int Ci = medoidMaxElements[i];
+                    int Bi = _hamming.FindHammingLenghtForDescriptors(medoids[i], descriptor);
+
+                    int value = Ci + Bi;
+                    if (value > maxVote)
+                    {
+                        maxVote = value;
+                        maxIndex = i;
+                    }
+                }
+
+                results.results[maxIndex] += 1;
             }
 
             return results;

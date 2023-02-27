@@ -19,7 +19,7 @@ namespace ImageProcessingDiplom.OpenCvServices
         {
             Mat image = CvInvoke.Imread(filePath + ".png", ImreadModes.Grayscale);
 
-            _detector = new Brisk();
+            _detector = new Brisk(10,4);
 
             VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
             _detector.DetectRaw(image, keypoints);
