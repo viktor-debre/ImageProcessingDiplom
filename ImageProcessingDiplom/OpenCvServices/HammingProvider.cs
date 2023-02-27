@@ -1,5 +1,4 @@
 ﻿using Emgu.CV;
-using ImageProcessingDiplom.Interfaces;
 
 namespace ImageProcessingDiplom.OpenCvServices
 {
@@ -8,73 +7,52 @@ namespace ImageProcessingDiplom.OpenCvServices
         public List<int> results;
     }
 
-    public class HammingProvider : IHammingProvider
+    public class HammingProvider
     {
         private const int DESC_NUMBER = 500;
         private const int DESC_SIZE = 512;
-        private const int THREADHOLD_DESC = DESC_SIZE / 8; 
+        private const int THREADHOLD_DESC = DESC_SIZE / 4;
 
-        public int[,] FindHammingDistance(Mat descriptors1, Mat descriptors2)
+        public List<int[,]> FindUniqueMathesForAllEtalon(List<Mat> etalons)
         {
-            var distances = new int[DESC_NUMBER, DESC_NUMBER];
+            var result = new List<int[,]>();
+            for (int i = 0; i < etalons.Count; i++)
+            {
+                result.Add(FindUniqueValue(etalons[i], etalons));
+            }
+
+            return result;
+        }
+
+        private int[,] FindUniqueValue(Mat comparingEtalon, List<Mat> etalons)
+        {
+            var result = new int[etalons.Count, DESC_NUMBER];
+
+
             for (int i = 0; i < DESC_NUMBER; i++)
             {
-                for (int j = 0; j < DESC_NUMBER; j++)
+                for (int j = 0; j < etalons.Count; j++)
                 {
-                    distances[i, j] = FindHammingLenghtForDescriptors(descriptors1.GetRawData(i), (descriptors2.GetRawData(j)));
+                    result[j, i] = FindCountOfRepeadByHammingLenght(etalons[j].GetRawData(i), comparingEtalon);
                 }
             }
 
-            return distances;
+            return result;
         }
 
-        public VoteResult VoteEtalon(List<Mat> etalons, Mat descriptors)
+        private int FindCountOfRepeadByHammingLenght(byte[] descriptor, Mat etalon)
         {
-            VoteResult results;
-            results.results = new List<int>() { 0, 0, 0 };
-
+            int result = 0;
             for (int i = 0; i < DESC_NUMBER; ++i)
             {
-                var descriptor = descriptors.GetRawData(i);
-
-                var minDistance = DESC_SIZE;
-                var indexOfEtalonToVote = -1;
-                for (int j = 0; j < etalons.Count; ++j)
+                var distance = FindHammingLenghtForDescriptors(descriptor, etalon.GetRawData(i));
+                if (distance < THREADHOLD_DESC)
                 {
-                    var distance = FindMinHammingLenght(descriptor, etalons[j]);
-                    if (distance < minDistance)
-                    {
-                        minDistance = distance;
-                        //Threshold
-                        if (minDistance < THREADHOLD_DESC)
-                        {
-                            indexOfEtalonToVote = j;
-                        }
-                        //indexOfEtalonToVote = j;
-                    }
-                }
-                if( indexOfEtalonToVote != -1)
-                {
-                    results.results[indexOfEtalonToVote] += 1;
+                    result += 1;
                 }
             }
 
-            return results;
-        }
-
-        private int FindMinHammingLenght(byte[] descriptor, Mat etalon)
-        {
-            int minDistance = DESC_SIZE;
-            for (int k = 0; k < DESC_NUMBER; ++k)
-            {
-                var distance = FindHammingLenghtForDescriptors(descriptor, etalon.GetRawData(k));
-                if(distance < minDistance)
-                {
-                    minDistance = distance;
-                }
-            }
-            
-            return minDistance;
+            return result;
         }
 
         public int FindHammingLenghtForDescriptors(byte[] descriptor1, byte[] descriptor2)

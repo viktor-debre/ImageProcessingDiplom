@@ -30,11 +30,11 @@ namespace ImageProcessingDiplom.OpenCvServices
             Keypoints = keypoints;
             Descriptors = descriptors;
 
-            //Image<Bgr, byte> outputImage = new Image<Bgr, byte>(image.Size);
-            //Features2DToolbox.DrawKeypoints(image, keypoints, outputImage, new Bgr(Color.Red), Features2DToolbox.KeypointDrawType.Default);
+            Image<Bgr, byte> outputImage = new Image<Bgr, byte>(image.Size);
+            Features2DToolbox.DrawKeypoints(image, keypoints, outputImage, new Bgr(Color.Red), Features2DToolbox.KeypointDrawType.Default);
 
-            //// Save the output image to a file
-            //CvInvoke.Imwrite(filePath + "_result.png", outputImage.Mat);
+            // Save the output image to a file
+            CvInvoke.Imwrite(filePath + "_result.png", outputImage.Mat);
         }
     }
 }

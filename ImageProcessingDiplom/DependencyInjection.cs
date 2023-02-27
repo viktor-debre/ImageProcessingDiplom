@@ -1,5 +1,4 @@
-﻿using ImageProcessingDiplom.Interfaces;
-using ImageProcessingDiplom.OpenCvServices;
+﻿using ImageProcessingDiplom.OpenCvServices;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ImageProcessingDiplom
@@ -8,9 +7,8 @@ namespace ImageProcessingDiplom
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddTransient<IHammingProvider, HammingProvider>();
-            services.AddTransient<IManhattanDictanceProvider, ManhattanDictanceProvider>();
-            services.AddTransient<MedoidFinder>();
+            services.AddTransient<HammingProvider>();
+            services.AddTransient<ManhattanDictanceProvider>();
 
             return services;
         }
