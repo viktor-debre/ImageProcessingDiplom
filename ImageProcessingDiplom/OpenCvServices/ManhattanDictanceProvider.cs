@@ -1,8 +1,6 @@
-﻿using ImageProcessingDiplom.Interfaces;
-
-namespace ImageProcessingDiplom.OpenCvServices
+﻿namespace ImageProcessingDiplom.OpenCvServices
 {
-    public class ManhattanDictanceProvider : IManhattanDictanceProvider
+    public class ManhattanDictanceProvider
     {
         private const double THRESHOLD_MATHES = 0.25f;
         private const int BRISK_BYTE_COUNT = 512;

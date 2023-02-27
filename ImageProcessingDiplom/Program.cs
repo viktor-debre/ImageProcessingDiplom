@@ -1,6 +1,5 @@
 ﻿using Emgu.CV;
 using ImageProcessingDiplom;
-using ImageProcessingDiplom.Interfaces;
 using ImageProcessingDiplom.OpenCvServices;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
@@ -11,8 +10,8 @@ var services = new ServiceCollection();
 var serviceProvider = services.AddServices()
     .BuildServiceProvider();
 
-var _hamming = serviceProvider.GetService<IHammingProvider>();
-var _manhattan = serviceProvider.GetService<IManhattanDictanceProvider>();
+var _hamming = serviceProvider.GetService<HammingProvider>();
+var _manhattan = serviceProvider.GetService<ManhattanDictanceProvider>();
 var _medoid = serviceProvider.GetService<MedoidFinder>();
 
 

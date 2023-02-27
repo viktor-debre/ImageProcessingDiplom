@@ -1,5 +1,4 @@
 ﻿using Emgu.CV;
-using ImageProcessingDiplom.Interfaces;
 
 namespace ImageProcessingDiplom.OpenCvServices
 {
@@ -8,7 +7,7 @@ namespace ImageProcessingDiplom.OpenCvServices
         public List<int> results;
     }
 
-    public class HammingProvider : IHammingProvider
+    public class HammingProvider
     {
         private const int DESC_NUMBER = 500;
         private const int DESC_SIZE = 512;

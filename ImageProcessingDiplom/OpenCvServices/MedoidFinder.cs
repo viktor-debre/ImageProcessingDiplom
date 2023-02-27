@@ -1,12 +1,11 @@
 ﻿using Emgu.CV;
-using ImageProcessingDiplom.Interfaces;
 
 namespace ImageProcessingDiplom.OpenCvServices
 {
     public class MedoidFinder
     {
-        private readonly IHammingProvider _hamming;
-        public MedoidFinder(IHammingProvider hamming)
+        private readonly HammingProvider _hamming;
+        public MedoidFinder(HammingProvider hamming)
         {
             _hamming = hamming;
         }
