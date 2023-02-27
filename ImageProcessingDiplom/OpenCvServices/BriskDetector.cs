@@ -31,7 +31,7 @@ namespace ImageProcessingDiplom.OpenCvServices
             Descriptors = descriptors;
 
             Image<Bgr, byte> outputImage = new Image<Bgr, byte>(image.Size);
-            Features2DToolbox.DrawKeypoints(image, keypoints, outputImage, new Bgr(Color.Red), Features2DToolbox.KeypointDrawType.Default);
+            Features2DToolbox.DrawKeypoints(image, keypoints, outputImage, new Bgr(Color.Green), Features2DToolbox.KeypointDrawType.Default);
 
             // Save the output image to a file
             CvInvoke.Imwrite(filePath + "_result.png", outputImage.Mat);
