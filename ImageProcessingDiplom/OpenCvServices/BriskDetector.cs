@@ -1,7 +1,9 @@
 ﻿using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Features2D;
+using Emgu.CV.Structure;
 using Emgu.CV.Util;
+using System.Drawing;
 
 namespace ImageProcessingDiplom.OpenCvServices
 {
@@ -15,9 +17,9 @@ namespace ImageProcessingDiplom.OpenCvServices
 
         public BriskDetector(string filePath)
         {
-            Mat image = CvInvoke.Imread(filePath, ImreadModes.Grayscale);
+            Mat image = CvInvoke.Imread(filePath + ".png", ImreadModes.Grayscale);
 
-            _detector = new Brisk();
+            _detector = new Brisk(10,4);
 
             VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
             _detector.DetectRaw(image, keypoints);
@@ -27,6 +29,12 @@ namespace ImageProcessingDiplom.OpenCvServices
 
             Keypoints = keypoints;
             Descriptors = descriptors;
+
+            //Image<Bgr, byte> outputImage = new Image<Bgr, byte>(image.Size);
+            //Features2DToolbox.DrawKeypoints(image, keypoints, outputImage, new Bgr(Color.Red), Features2DToolbox.KeypointDrawType.Default);
+
+            //// Save the output image to a file
+            //CvInvoke.Imwrite(filePath + "_result.png", outputImage.Mat);
         }
     }
 }

@@ -3,16 +3,23 @@ using ImageProcessingDiplom.Interfaces;
 
 namespace ImageProcessingDiplom.OpenCvServices
 {
+    public struct VoteResult
+    {
+        public List<int> results;
+    }
+
     public class HammingProvider : IHammingProvider
     {
-        private const int DESC_SIZE = 500;
+        private const int DESC_NUMBER = 500;
+        private const int DESC_SIZE = 512;
+        private const int THREADHOLD_DESC = DESC_SIZE / 8; 
 
         public int[,] FindHammingDistance(Mat descriptors1, Mat descriptors2)
         {
-            var distances = new int[DESC_SIZE, DESC_SIZE];
-            for (int i = 0; i < DESC_SIZE; i++)
+            var distances = new int[DESC_NUMBER, DESC_NUMBER];
+            for (int i = 0; i < DESC_NUMBER; i++)
             {
-                for (int j = 0; j < DESC_SIZE; j++)
+                for (int j = 0; j < DESC_NUMBER; j++)
                 {
                     distances[i, j] = FindHammingLenghtForDescriptors(descriptors1.GetRawData(i), (descriptors2.GetRawData(j)));
                 }
@@ -21,7 +28,56 @@ namespace ImageProcessingDiplom.OpenCvServices
             return distances;
         }
 
-        private int FindHammingLenghtForDescriptors(byte[] descriptor1, byte[] descriptor2)
+        public VoteResult VoteEtalon(List<Mat> etalons, Mat descriptors)
+        {
+            VoteResult results;
+            results.results = new List<int>() { 0, 0, 0 };
+
+            for (int i = 0; i < DESC_NUMBER; ++i)
+            {
+                var descriptor = descriptors.GetRawData(i);
+
+                var minDistance = DESC_SIZE;
+                var indexOfEtalonToVote = -1;
+                for (int j = 0; j < etalons.Count; ++j)
+                {
+                    var distance = FindMinHammingLenght(descriptor, etalons[j]);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        //Threshold
+                        if (minDistance < THREADHOLD_DESC)
+                        {
+                            indexOfEtalonToVote = j;
+                        }
+                        //indexOfEtalonToVote = j;
+                    }
+                }
+                if( indexOfEtalonToVote != -1)
+                {
+                    results.results[indexOfEtalonToVote] += 1;
+                }
+            }
+
+            return results;
+        }
+
+        private int FindMinHammingLenght(byte[] descriptor, Mat etalon)
+        {
+            int minDistance = DESC_SIZE;
+            for (int k = 0; k < DESC_NUMBER; ++k)
+            {
+                var distance = FindHammingLenghtForDescriptors(descriptor, etalon.GetRawData(k));
+                if(distance < minDistance)
+                {
+                    minDistance = distance;
+                }
+            }
+            
+            return minDistance;
+        }
+
+        public int FindHammingLenghtForDescriptors(byte[] descriptor1, byte[] descriptor2)
         {
             int distance = 0;
 
