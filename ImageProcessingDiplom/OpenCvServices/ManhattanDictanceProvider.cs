@@ -2,7 +2,7 @@
 {
     public class ManhattanDictanceProvider
     {
-        private const double THRESHOLD_MATHES = 0.25f;
+        private const double THRESHOLD_MATHES = 0.125f;
         private const int BRISK_BYTE_COUNT = 512;
 
         public int CountThresholdMathes(int[,] distances)
