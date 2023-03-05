@@ -92,8 +92,8 @@ results += "Mathes 1 with 3: " + mathes13 + '\n';
 Console.WriteLine("Mathes 1 with 3: " + mathes13);
 
 var mathes21 = _manhattan.CountThresholdMathes(distances21);
-results += "Mathes 1 with 3: " + mathes21 + '\n';
-Console.WriteLine("Mathes 1 with 3: " + mathes21);
+results += "Mathes 2 with 1: " + mathes21 + '\n';
+Console.WriteLine("Mathes 2 with 1: " + mathes21);
 
 var mathes22 = _manhattan.CountThresholdMathes(distances22);
 results += "Mathes 2 with 2: " + mathes22 + '\n';
@@ -104,12 +104,12 @@ results += "Mathes 2 with 3: " + mathes23 + '\n';
 Console.WriteLine("Mathes 2 with 3: " + mathes23);
 
 var mathes31 = _manhattan.CountThresholdMathes(distances31);
-results += "Mathes 3 with 3: " + mathes31 + '\n';
-Console.WriteLine("Mathes 3 with 3: " + mathes31);
+results += "Mathes 3 with 1: " + mathes31 + '\n';
+Console.WriteLine("Mathes 3 with 1: " + mathes31);
 
 var mathes32 = _manhattan.CountThresholdMathes(distances32);
-results += "Mathes 3 with 3: " + mathes32 + '\n';
-Console.WriteLine("Mathes 3 with 3: " + mathes32);
+results += "Mathes 3 with 2: " + mathes32 + '\n';
+Console.WriteLine("Mathes 3 with 2: " + mathes32);
 
 var mathes33 = _manhattan.CountThresholdMathes(distances33);
 results += "Mathes 3 with 3: " + mathes33 + '\n';
