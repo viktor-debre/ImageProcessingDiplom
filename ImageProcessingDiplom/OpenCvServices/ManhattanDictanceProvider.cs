@@ -21,6 +21,23 @@
             return count;
         }
 
+        public bool MatrixIsSymmetric(int[,] distances)
+        {
+            bool result = true;
+            for (int i = 0; i < distances.GetLength(0); i++)
+            {
+                for (int j = 0; j < distances.GetLength(0); j++)
+                {
+                    if (distances[i, j] != distances[j, i])
+                    {
+                        result = false;
+                    }
+                }
+            }
+
+            return result;
+        }
+
         public int[] FindMinimumsOfDistances(int[,] distances)
         {
             int[] minimums = new int[distances.GetLength(0)];

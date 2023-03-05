@@ -78,6 +78,12 @@ Console.WriteLine("Matrix etalon time elapsed: " + stopwatch3.ElapsedMillisecond
 //    Console.WriteLine($"Mathes 1 image with {index} etalon: {item}");
 //    index++;
 //}
+var isSymmetric11 = _manhattan.MatrixIsSymmetric(distances11);
+
+string symetric = isSymmetric11 ? " " : "not ";
+results += "Matrix 1 is " + symetric + "symetric" + '\n';
+Console.WriteLine("Mathes 1 is " + symetric + "symetric");
+
 
 var mathes11 = _manhattan.CountThresholdMathes(distances11);
 results += "Mathes 1 with 1: " + mathes11 + '\n';
