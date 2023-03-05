@@ -59,11 +59,13 @@ var descriptors3 = detector3.Descriptors;
 Stopwatch stopwatch3 = Stopwatch.StartNew();
 // distances
 var distances11 = _hamming.FindHammingDistance(detector1.Descriptors, detector1.Descriptors);
-
 var distances12 = _hamming.FindHammingDistance(detector1.Descriptors, detector2.Descriptors);
 var distances13 = _hamming.FindHammingDistance(detector1.Descriptors, detector3.Descriptors);
+var distances21 = _hamming.FindHammingDistance(detector2.Descriptors, detector1.Descriptors);
 var distances22 = _hamming.FindHammingDistance(detector2.Descriptors, detector2.Descriptors);
 var distances23 = _hamming.FindHammingDistance(detector2.Descriptors, detector3.Descriptors);
+var distances31 = _hamming.FindHammingDistance(detector3.Descriptors, detector1.Descriptors);
+var distances32 = _hamming.FindHammingDistance(detector3.Descriptors, detector2.Descriptors);
 var distances33 = _hamming.FindHammingDistance(detector3.Descriptors, detector3.Descriptors);
 stopwatch3.Stop();
 Console.WriteLine("Matrix etalon time elapsed: " + stopwatch3.ElapsedMilliseconds);
@@ -89,6 +91,10 @@ var mathes13 = _manhattan.CountThresholdMathes(distances13);
 results += "Mathes 1 with 3: " + mathes13 + '\n';
 Console.WriteLine("Mathes 1 with 3: " + mathes13);
 
+var mathes21 = _manhattan.CountThresholdMathes(distances21);
+results += "Mathes 1 with 3: " + mathes21 + '\n';
+Console.WriteLine("Mathes 1 with 3: " + mathes21);
+
 var mathes22 = _manhattan.CountThresholdMathes(distances22);
 results += "Mathes 2 with 2: " + mathes22 + '\n';
 Console.WriteLine("Mathes 2 with 2: " + mathes22);
@@ -96,6 +102,14 @@ Console.WriteLine("Mathes 2 with 2: " + mathes22);
 var mathes23 = _manhattan.CountThresholdMathes(distances23);
 results += "Mathes 2 with 3: " + mathes23 + '\n';
 Console.WriteLine("Mathes 2 with 3: " + mathes23);
+
+var mathes31 = _manhattan.CountThresholdMathes(distances31);
+results += "Mathes 3 with 3: " + mathes31 + '\n';
+Console.WriteLine("Mathes 3 with 3: " + mathes31);
+
+var mathes32 = _manhattan.CountThresholdMathes(distances32);
+results += "Mathes 3 with 3: " + mathes32 + '\n';
+Console.WriteLine("Mathes 3 with 3: " + mathes32);
 
 var mathes33 = _manhattan.CountThresholdMathes(distances33);
 results += "Mathes 3 with 3: " + mathes33 + '\n';
