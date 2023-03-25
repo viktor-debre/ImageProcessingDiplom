@@ -23,24 +23,27 @@ var imagePathes = new List<string>
    projectPath + "\\Images\\image1",
    projectPath + "\\Images\\image2",
    projectPath + "\\Images\\image3",
-   projectPath + "\\Images\\image4"
+   projectPath + "\\Images\\image4",
+   projectPath + "\\Images\\image5",
 };
 
 BriskDetector detector1 = new BriskDetector(imagePathes[0]);
 BriskDetector detector2 = new BriskDetector(imagePathes[1]);
 BriskDetector detector3 = new BriskDetector(imagePathes[2]);
 BriskDetector detector4 = new BriskDetector(imagePathes[3]);
+BriskDetector detector5 = new BriskDetector(imagePathes[4]);
 
 var descriptors1 = detector1.Descriptors;
 var descriptors2 = detector2.Descriptors;
 var descriptors3 = detector3.Descriptors;
 var descriptors4 = detector4.Descriptors;
+var descriptors5 = detector5.Descriptors;
 
 
 //Vote etalones
 Stopwatch stopwatch = Stopwatch.StartNew();
 List<Mat> etalons = new List<Mat>() { detector1.Descriptors, detector2.Descriptors, detector3.Descriptors };
-VoteResult voteResult1 = _hamming.VoteEtalon(etalons, detector4.Descriptors);
+VoteResult voteResult1 = _hamming.VoteEtalon(etalons, detector5.Descriptors);
 
 
 int index = 1;
@@ -70,51 +73,51 @@ Stopwatch stopwatch3 = Stopwatch.StartNew();
 // distances
 var distances11 = _hamming.FindHammingDistance(detector1.Descriptors, detector1.Descriptors);
 
-var distances12 = _hamming.FindHammingDistance(detector1.Descriptors, detector2.Descriptors);
-var distances13 = _hamming.FindHammingDistance(detector1.Descriptors, detector3.Descriptors);
-var distances21 = _hamming.FindHammingDistance(detector2.Descriptors, detector1.Descriptors);
+//var distances12 = _hamming.FindHammingDistance(detector1.Descriptors, detector2.Descriptors);
+//var distances13 = _hamming.FindHammingDistance(detector1.Descriptors, detector3.Descriptors);
+//var distances21 = _hamming.FindHammingDistance(detector2.Descriptors, detector1.Descriptors);
 var distances22 = _hamming.FindHammingDistance(detector2.Descriptors, detector2.Descriptors);
-var distances23 = _hamming.FindHammingDistance(detector2.Descriptors, detector3.Descriptors);
-var distances31 = _hamming.FindHammingDistance(detector3.Descriptors, detector1.Descriptors);
-var distances32 = _hamming.FindHammingDistance(detector3.Descriptors, detector2.Descriptors);
+//var distances23 = _hamming.FindHammingDistance(detector2.Descriptors, detector3.Descriptors);
+//var distances31 = _hamming.FindHammingDistance(detector3.Descriptors, detector1.Descriptors);
+//var distances32 = _hamming.FindHammingDistance(detector3.Descriptors, detector2.Descriptors);
 var distances33 = _hamming.FindHammingDistance(detector3.Descriptors, detector3.Descriptors);
 
 
-var mathes11 = _manhattan.CountThresholdMathes(distances11);
-results += "Mathes 1 with 1: " + mathes11 + '\n';
-Console.WriteLine("Mathes 1 with 1: " + mathes11);
+//var mathes11 = _manhattan.CountThresholdMathes(distances11);
+//results += "Mathes 1 with 1: " + mathes11 + '\n';
+//Console.WriteLine("Mathes 1 with 1: " + mathes11);
 
-var mathes12 = _manhattan.CountThresholdMathes(distances12);
-results += "Mathes 1 with 2: " + mathes12 + '\n';
-Console.WriteLine("Mathes 1 with 2: " + mathes12);
+//var mathes12 = _manhattan.CountThresholdMathes(distances12);
+//results += "Mathes 1 with 2: " + mathes12 + '\n';
+//Console.WriteLine("Mathes 1 with 2: " + mathes12);
 
-var mathes13 = _manhattan.CountThresholdMathes(distances13);
-results += "Mathes 1 with 3: " + mathes13 + '\n';
-Console.WriteLine("Mathes 1 with 3: " + mathes13);
+//var mathes13 = _manhattan.CountThresholdMathes(distances13);
+//results += "Mathes 1 with 3: " + mathes13 + '\n';
+//Console.WriteLine("Mathes 1 with 3: " + mathes13);
 
-var mathes21 = _manhattan.CountThresholdMathes(distances21);
-results += "Mathes 2 with 1: " + mathes21 + '\n';
-Console.WriteLine("Mathes 2 with 2: " + mathes21);
+//var mathes21 = _manhattan.CountThresholdMathes(distances21);
+//results += "Mathes 2 with 1: " + mathes21 + '\n';
+//Console.WriteLine("Mathes 2 with 2: " + mathes21);
 
-var mathes22 = _manhattan.CountThresholdMathes(distances22);
-results += "Mathes 2 with 2: " + mathes22 + '\n';
-Console.WriteLine("Mathes 2 with 2: " + mathes22);
+//var mathes22 = _manhattan.CountThresholdMathes(distances22);
+//results += "Mathes 2 with 2: " + mathes22 + '\n';
+//Console.WriteLine("Mathes 2 with 2: " + mathes22);
 
-var mathes23 = _manhattan.CountThresholdMathes(distances23);
-results += "Mathes 2 with 3: " + mathes23 + '\n';
-Console.WriteLine("Mathes 2 with 3: " + mathes23);
+//var mathes23 = _manhattan.CountThresholdMathes(distances23);
+//results += "Mathes 2 with 3: " + mathes23 + '\n';
+//Console.WriteLine("Mathes 2 with 3: " + mathes23);
 
-var mathes31 = _manhattan.CountThresholdMathes(distances31);
-results += "Mathes 3 with 3: " + mathes31 + '\n';
-Console.WriteLine("Mathes 3 with 3: " + mathes31);
+//var mathes31 = _manhattan.CountThresholdMathes(distances31);
+//results += "Mathes 3 with 3: " + mathes31 + '\n';
+//Console.WriteLine("Mathes 3 with 3: " + mathes31);
 
-var mathes32 = _manhattan.CountThresholdMathes(distances32);
-results += "Mathes 3 with 3: " + mathes32 + '\n';
-Console.WriteLine("Mathes 3 with 3: " + mathes32);
+//var mathes32 = _manhattan.CountThresholdMathes(distances32);
+//results += "Mathes 3 with 3: " + mathes32 + '\n';
+//Console.WriteLine("Mathes 3 with 3: " + mathes32);
 
-var mathes33 = _manhattan.CountThresholdMathes(distances33);
-results += "Mathes 3 with 3: " + mathes33 + '\n';
-Console.WriteLine("Mathes 3 with 3: " + mathes33);
+//var mathes33 = _manhattan.CountThresholdMathes(distances33);
+//results += "Mathes 3 with 3: " + mathes33 + '\n';
+//Console.WriteLine("Mathes 3 with 3: " + mathes33);
 
 stopwatch3.Stop();
 Console.WriteLine("Matrix etalon time elapsed: " + stopwatch3.ElapsedMilliseconds);
@@ -149,7 +152,7 @@ int minMedoid3 = _medoid.FindMinDistanceForMedoid(distances33, medoidIndex3);
 
 List<int> minMedoidElements = new List<int>() { minMedoid1, minMedoid2, minMedoid3 };
 
-VoteResult voteResult2 = _medoid.TriangleMethodMin(descriptors4,medoids,minMedoidElements);
+VoteResult voteResult2 = _medoid.TriangleMethodMin(descriptors5,medoids,minMedoidElements);
 
 int index2 = 1;
 foreach (var item in voteResult2.results)
@@ -166,7 +169,7 @@ int maxMedoid3 = _medoid.FindMaxDistanceForMedoid(distances33, medoidIndex3);
 
 List<int> maxMedoidElements = new List<int>() { maxMedoid1, maxMedoid2, maxMedoid3 };
 
-VoteResult voteResult3 = _medoid.TriangleMethodMax(descriptors4, medoids, maxMedoidElements);
+VoteResult voteResult3 = _medoid.TriangleMethodMax(descriptors5, medoids, maxMedoidElements);
 
 int index3 = 1;
 

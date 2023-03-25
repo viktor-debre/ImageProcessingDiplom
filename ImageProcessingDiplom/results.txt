@@ -1,14 +1,5 @@
-Voting method time elapsed: 8063
-Mathes 1 with 1: 500
-Mathes 1 with 2: 140
-Mathes 1 with 3: 169
-Mathes 2 with 1: 170
-Mathes 2 with 2: 500
-Mathes 2 with 3: 141
-Mathes 3 with 3: 160
-Mathes 3 with 3: 133
-Mathes 3 with 3: 500
+Voting method time elapsed: 7708
 Medoid 1 is descriptor number 27
 Medoid 2 is descriptor number 308
 Medoid 3 is descriptor number 29
-Medoid method time elapsed: 35
+Medoid method time elapsed: 44

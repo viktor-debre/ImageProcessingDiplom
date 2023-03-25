@@ -11,7 +11,7 @@ namespace ImageProcessingDiplom.OpenCvServices
     {
         private const int DESC_NUMBER = 500;
         private const int DESC_SIZE = 512;
-        private const int THREADHOLD_DESC = DESC_SIZE / 8; 
+        private const int THREADHOLD_DESC = DESC_SIZE / 4; 
 
         public int[,] FindHammingDistance(Mat descriptors1, Mat descriptors2)
         {
