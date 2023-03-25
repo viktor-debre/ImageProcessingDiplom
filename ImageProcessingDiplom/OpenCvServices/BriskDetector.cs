@@ -37,7 +37,7 @@ namespace ImageProcessingDiplom.OpenCvServices
             }
             VectorOfKeyPoint top500KeyPoints = new VectorOfKeyPoint(mKeyPointsList.ToArray());
 
-            Keypoints = keypoints;
+            Keypoints = top500KeyPoints;
             Descriptors = descriptors;
 
             Image<Bgr, byte> outputImage = new Image<Bgr, byte>(image.Size);
