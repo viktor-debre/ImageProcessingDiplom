@@ -11,7 +11,7 @@ namespace ImageProcessingDiplom.OpenCvServices
     {
         private const int DESC_NUMBER = 500;
         private const int DESC_SIZE = 512;
-        private const int THREADHOLD_DESC = DESC_SIZE / 4;
+        private const int THREADHOLD_DESC = DESC_SIZE / 4 + 50;
 
         public List<int[,]> FindUniqueMathesForAllEtalon(List<Mat> etalons)
         {
