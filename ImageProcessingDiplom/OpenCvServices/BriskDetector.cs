@@ -19,7 +19,7 @@ namespace ImageProcessingDiplom.OpenCvServices
         {
             Mat image = CvInvoke.Imread(filePath + ".png", ImreadModes.Grayscale);
 
-            _detector = new Brisk(10,4);
+            _detector = new Brisk();
 
             VectorOfKeyPoint keypoints = new VectorOfKeyPoint();
             _detector.DetectRaw(image, keypoints);
@@ -27,11 +27,21 @@ namespace ImageProcessingDiplom.OpenCvServices
             Mat descriptors = new Mat();
             _detector.Compute(image, keypoints, descriptors);
 
+            MKeyPoint[] mKeyPointsArray = keypoints.ToArray();
+            List<MKeyPoint> mKeyPointsList = new List<MKeyPoint>();
+
+            //int numKeyPoints = Math.Min(700, mKeyPointsArray.Length);
+            for (int i = 0; i < mKeyPointsArray.Length - 1; i += 2)
+            {
+                mKeyPointsList.Add(mKeyPointsArray[i]);
+            }
+            VectorOfKeyPoint top500KeyPoints = new VectorOfKeyPoint(mKeyPointsList.ToArray());
+
             Keypoints = keypoints;
             Descriptors = descriptors;
 
             Image<Bgr, byte> outputImage = new Image<Bgr, byte>(image.Size);
-            Features2DToolbox.DrawKeypoints(image, keypoints, outputImage, new Bgr(Color.Red), Features2DToolbox.KeypointDrawType.Default);
+            Features2DToolbox.DrawKeypoints(image, top500KeyPoints, outputImage, new Bgr(Color.Red), Features2DToolbox.KeypointDrawType.Default);
 
             // Save the output image to a file
             CvInvoke.Imwrite(filePath + "_result.png", outputImage.Mat);

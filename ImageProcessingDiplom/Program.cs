@@ -34,8 +34,11 @@ BriskDetector detector3 = new BriskDetector(imagePathes[2]);
 var descriptors1 = detector1.Descriptors;
 var descriptors2 = detector2.Descriptors;
 var descriptors3 = detector3.Descriptors;
-//var descriptors4 = detector4.Descriptors;
 
+Console.WriteLine($"Count on image 1 of founded keypoints: {detector1.Keypoints.ToArray().Length}");
+Console.WriteLine($"Count on image 1 of founded keypoints: {detector2.Keypoints.ToArray().Length}");
+Console.WriteLine($"Count on image 1 of founded keypoints: {detector3.Keypoints.ToArray().Length}");
+//var descriptors4 = detector4.Descriptors;
 
 ////Vote etalones
 //Stopwatch stopwatch = Stopwatch.StartNew();

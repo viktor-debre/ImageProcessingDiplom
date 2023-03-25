@@ -1,10 +1,10 @@
-Matrix 1 is  
+Matrix 1 is  symetric
 Mathes 1 with 1: 500
-Mathes 1 with 2: 281
-Mathes 1 with 3: 193
-Mathes 2 with 1: 217
+Mathes 1 with 2: 198
+Mathes 1 with 3: 165
+Mathes 2 with 1: 179
 Mathes 2 with 2: 500
-Mathes 2 with 3: 265
-Mathes 3 with 1: 139
-Mathes 3 with 2: 269
+Mathes 2 with 3: 209
+Mathes 3 with 1: 175
+Mathes 3 with 2: 293
 Mathes 3 with 3: 500
