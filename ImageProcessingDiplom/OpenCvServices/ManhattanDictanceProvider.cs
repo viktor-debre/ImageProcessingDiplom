@@ -12,7 +12,7 @@
 
             for (int i = 0; i < minimums.Length; i++)
             {
-                if (minimums[i] < BRISK_BYTE_COUNT * THRESHOLD_MATHES + 32)
+                if (minimums[i] < BRISK_BYTE_COUNT * THRESHOLD_MATHES)
                 {
                     count++;
                 }

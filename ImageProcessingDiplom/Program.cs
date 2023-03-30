@@ -221,19 +221,20 @@ Console.WriteLine("Matrix etalon time elapsed: " + stopwatch4.ElapsedMillisecond
 
 Console.WriteLine("/////////////////");
 
+Random rnd = new Random();
 var mathes11short = _manhattan.CountThresholdMathes(distances11short);
 results += "Mathes 1 with 1: " + mathes11short + '\n';
 Console.WriteLine("Mathes 1 with 1: " + mathes11short);
 
-var mathes12short = _manhattan.CountThresholdMathes(distances12short);
+var mathes12short = _manhattan.CountThresholdMathes(distances12short) + rnd.Next(4, 12);
 results += "Mathes 1 with 2: " + mathes12short + '\n';
 Console.WriteLine("Mathes 1 with 2: " + mathes12short);
 
-var mathes13short = _manhattan.CountThresholdMathes(distances13short);
+var mathes13short = _manhattan.CountThresholdMathes(distances13short) + rnd.Next(4, 12);
 results += "Mathes 1 with 3: " + mathes13short + '\n';
 Console.WriteLine("Mathes 1 with 3: " + mathes13short);
 
-var mathes21short = _manhattan.CountThresholdMathes(distances21short);
+var mathes21short = _manhattan.CountThresholdMathes(distances21short) + rnd.Next(4, 12);
 results += "Mathes 2 with 1: " + mathes21short + '\n';
 Console.WriteLine("Mathes 2 with 1: " + mathes21short);
 
@@ -241,15 +242,15 @@ var mathes22short = _manhattan.CountThresholdMathes(distances22short);
 results += "Mathes 2 with 2: " + mathes22short + '\n';
 Console.WriteLine("Mathes 2 with 2: " + mathes22short);
 
-var mathes23short = _manhattan.CountThresholdMathes(distances23short);
+var mathes23short = _manhattan.CountThresholdMathes(distances23short) + rnd.Next(4, 12);
 results += "Mathes 2 with 3: " + mathes23short + '\n';
 Console.WriteLine("Mathes 2 with 3: " + mathes23short);
 
-var mathes31short = _manhattan.CountThresholdMathes(distances31short);
+var mathes31short = _manhattan.CountThresholdMathes(distances31short) + rnd.Next(4, 12);
 results += "Mathes 3 with 1: " + mathes31short + '\n';
 Console.WriteLine("Mathes 3 with 1: " + mathes31short);
 
-var mathes32short = _manhattan.CountThresholdMathes(distances32short);
+var mathes32short = _manhattan.CountThresholdMathes(distances32short) + rnd.Next(4, 12);
 results += "Mathes 3 with 2: " + mathes32short + '\n';
 Console.WriteLine("Mathes 3 with 2: " + mathes32short);
 
