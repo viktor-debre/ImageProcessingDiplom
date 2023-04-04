@@ -134,22 +134,19 @@ Console.WriteLine();
 Console.WriteLine("V1 results:");
 foreach (var v in v1)
 {
-    if (v < -1) Console.Write(-v + " ");
-    else Console.Write(v + " ");
+    Console.Write(v + " ");
 }
 Console.WriteLine();
 Console.WriteLine("V2 results:");
 foreach (var v in v2)
 {
-    if (v < -1) Console.Write(-v + " ");
-    else Console.Write(v + " ");
+    Console.Write(v + " ");
 }
 Console.WriteLine();
 Console.WriteLine("V3 results:");
 foreach (var v in v3)
 {
-    if (v < -1) Console.Write(-v + " ");
-    else Console.Write(v + " ");
+    Console.Write(v + " ");
 }
 
 Console.WriteLine();
