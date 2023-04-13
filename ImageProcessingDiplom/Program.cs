@@ -107,18 +107,18 @@ for (int k = 0; k < uniqueNumbers.Count; k++)
 }
 
 
-//for (int k = 0; k < uniqueNumbers.Count; k++)
-//{
-//    for (int i = 0; i < listDescriptors.Count; i++)
-//    {
-//        results += $"Repeding value for etalon {k + 1} with etalon {i + 1}\n";
-//        for (int j = 0; j < 500; j++)
-//        {
-//            results += b[k][i, j] / 1000.0 + " ";
-//        }
-//        results += '\n';
-//    }
-//}
+for (int k = 0; k < uniqueNumbers.Count; k++)
+{
+    for (int i = 0; i < listDescriptors.Count; i++)
+    {
+        results += $"Repeding value for etalon {k + 1} with etalon {i + 1}\n";
+        for (int j = 0; j < 500; j++)
+        {
+            results += b[k][i, j] / 1000.0 + " ";
+        }
+        results += '\n';
+    }
+}
 
 List<int[,]> s = new List<int[,]>();
 
@@ -200,9 +200,9 @@ results += "Mathes 3 with 3: " + mathes33 + '\n';
 Console.WriteLine("Mathes 3 with 3: " + mathes33);
 
 
-int[] indexes1 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(0, uniqueNumbers[0]));
-int[] indexes2 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(1, uniqueNumbers[1]));
-int[] indexes3 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(2, uniqueNumbers[2]));
+int[] indexes1 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(0, b[0]));
+int[] indexes2 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(1, b[1]));
+int[] indexes3 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(2, b[2]));
 
 
 Stopwatch stopwatch4 = Stopwatch.StartNew();
