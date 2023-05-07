@@ -201,6 +201,55 @@ foreach (var item in voteResult3.results)
 //}
 
 stopwatch2.Stop();
+
+
+var stopwatch5 = new Stopwatch();
+stopwatch5.Start();
+
+VoteResult voteResultMedoids1 = _hamming.VoteMedoid(medoids, descriptors1);
+VoteResult voteResultMedoids2 = _hamming.VoteMedoid(medoids, descriptors2);
+VoteResult voteResultMedoids3 = _hamming.VoteMedoid(medoids, descriptors3);
+VoteResult voteResultMedoids4 = _hamming.VoteMedoid(medoids, descriptors4);
+VoteResult voteResultMedoids5 = _hamming.VoteMedoid(medoids, descriptors5);
+
+int index4 = 1;
+Console.WriteLine("///////////////////////////");
+foreach (var item in voteResultMedoids1.results)
+{
+    Console.WriteLine($"Mathes 1 image with {index4} etalon: {item}");
+    index4++;
+}
+index4 = 1;
+
+foreach (var item in voteResultMedoids2.results)
+{
+    Console.WriteLine($"Mathes 2 image with {index4} etalon: {item}");
+    index4++;
+}
+index4 = 1;
+
+foreach (var item in voteResultMedoids3.results)
+{
+    Console.WriteLine($"Mathes 3 image with {index4} etalon: {item}");
+    index4++;
+}
+index4 = 1;
+
+foreach (var item in voteResultMedoids4.results)
+{
+    Console.WriteLine($"Mathes 4 image with {index4} etalon: {item}");
+    index4++;
+}
+index4 = 1;
+
+foreach (var item in voteResultMedoids5.results)
+{
+    Console.WriteLine($"Mathes 5 image with {index4} etalon: {item}");
+    index4++;
+}
+
+stopwatch5.Stop();
+
 results += "Medoid method time elapsed: " + stopwatch2.ElapsedMilliseconds + '\n';
 Console.WriteLine("Medoid method time elapsed: " + stopwatch2.ElapsedMilliseconds);
 

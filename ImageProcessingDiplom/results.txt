@@ -1,5 +1,5 @@
-Voting method time elapsed: 7708
+Voting method time elapsed: 5388
 Medoid 1 is descriptor number 27
 Medoid 2 is descriptor number 308
 Medoid 3 is descriptor number 29
-Medoid method time elapsed: 44
+Medoid method time elapsed: 17

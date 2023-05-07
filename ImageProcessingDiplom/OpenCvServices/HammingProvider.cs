@@ -11,7 +11,7 @@ namespace ImageProcessingDiplom.OpenCvServices
     {
         private const int DESC_NUMBER = 500;
         private const int DESC_SIZE = 512;
-        private const int THREADHOLD_DESC = DESC_SIZE / 4; 
+        private const int THREADHOLD_DESC = DESC_SIZE / 4;
 
         public int[,] FindHammingDistance(Mat descriptors1, Mat descriptors2)
         {
@@ -52,7 +52,36 @@ namespace ImageProcessingDiplom.OpenCvServices
                         //indexOfEtalonToVote = j;
                     }
                 }
-                if( indexOfEtalonToVote != -1)
+                if (indexOfEtalonToVote != -1)
+                {
+                    results.results[indexOfEtalonToVote] += 1;
+                }
+            }
+
+            return results;
+        }
+
+        public VoteResult VoteMedoid(List<byte[]> medoids, Mat descriptors)
+        {
+            VoteResult results;
+            results.results = new List<int>() { 0, 0, 0 };
+
+            for (int i = 0; i < DESC_NUMBER; ++i)
+            {
+                var descriptor = descriptors.GetRawData(i);
+
+                var minDistance = DESC_SIZE;
+                var indexOfEtalonToVote = -1;
+                for (int j = 0; j < medoids.Count; ++j)
+                {
+                    var distance = FindHammingLenghtForDescriptors(descriptor, medoids[j]);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        indexOfEtalonToVote = j;
+                    }
+                }
+                if (indexOfEtalonToVote != -1)
                 {
                     results.results[indexOfEtalonToVote] += 1;
                 }
@@ -67,12 +96,12 @@ namespace ImageProcessingDiplom.OpenCvServices
             for (int k = 0; k < DESC_NUMBER; ++k)
             {
                 var distance = FindHammingLenghtForDescriptors(descriptor, etalon.GetRawData(k));
-                if(distance < minDistance)
+                if (distance < minDistance)
                 {
                     minDistance = distance;
                 }
             }
-            
+
             return minDistance;
         }
 
