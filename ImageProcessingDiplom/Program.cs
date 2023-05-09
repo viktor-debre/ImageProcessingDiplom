@@ -42,7 +42,7 @@ var descriptors5 = detector5.Descriptors;
 
 //Vote etalones
 Stopwatch stopwatch = Stopwatch.StartNew();
-List<Mat> etalons = new List<Mat>() { detector1.Descriptors, detector2.Descriptors, detector3.Descriptors };
+List<Mat> etalons = new() { detector1.Descriptors, detector2.Descriptors, detector3.Descriptors };
 VoteResult voteResult1 = _hamming.VoteEtalon(etalons, detector5.Descriptors);
 
 
