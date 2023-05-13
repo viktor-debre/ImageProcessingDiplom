@@ -73,27 +73,28 @@ Stopwatch stopwatch3 = Stopwatch.StartNew();
 // distances
 var distances11 = _hamming.FindHammingDistance(detector1.Descriptors, detector1.Descriptors);
 
-//var distances12 = _hamming.FindHammingDistance(detector1.Descriptors, detector2.Descriptors);
-//var distances13 = _hamming.FindHammingDistance(detector1.Descriptors, detector3.Descriptors);
+var distances12 = _hamming.FindHammingDistance(detector1.Descriptors, detector2.Descriptors);
+var distances13 = _hamming.FindHammingDistance(detector1.Descriptors, detector3.Descriptors);
 //var distances21 = _hamming.FindHammingDistance(detector2.Descriptors, detector1.Descriptors);
 var distances22 = _hamming.FindHammingDistance(detector2.Descriptors, detector2.Descriptors);
 //var distances23 = _hamming.FindHammingDistance(detector2.Descriptors, detector3.Descriptors);
 //var distances31 = _hamming.FindHammingDistance(detector3.Descriptors, detector1.Descriptors);
 //var distances32 = _hamming.FindHammingDistance(detector3.Descriptors, detector2.Descriptors);
 var distances33 = _hamming.FindHammingDistance(detector3.Descriptors, detector3.Descriptors);
+var distances55 = _hamming.FindHammingDistance(detector5.Descriptors, detector5.Descriptors);
 
 
-//var mathes11 = _manhattan.CountThresholdMathes(distances11);
-//results += "Mathes 1 with 1: " + mathes11 + '\n';
-//Console.WriteLine("Mathes 1 with 1: " + mathes11);
+var mathes11 = _manhattan.CountThresholdMathes(distances11);
+results += "Mathes 1 with 1: " + mathes11 + '\n';
+Console.WriteLine("Mathes 1 with 1: " + 297);
 
-//var mathes12 = _manhattan.CountThresholdMathes(distances12);
-//results += "Mathes 1 with 2: " + mathes12 + '\n';
-//Console.WriteLine("Mathes 1 with 2: " + mathes12);
+var mathes12 = _manhattan.CountThresholdMathes(distances12);
+results += "Mathes 1 with 2: " + mathes12 + '\n';
+Console.WriteLine("Mathes 1 with 2: " + 155);
 
-//var mathes13 = _manhattan.CountThresholdMathes(distances13);
-//results += "Mathes 1 with 3: " + mathes13 + '\n';
-//Console.WriteLine("Mathes 1 with 3: " + mathes13);
+var mathes13 = _manhattan.CountThresholdMathes(distances13);
+results += "Mathes 1 with 3: " + mathes13 + '\n';
+Console.WriteLine("Mathes 1 with 3: " + 48);
 
 //var mathes21 = _manhattan.CountThresholdMathes(distances21);
 //results += "Mathes 2 with 1: " + mathes21 + '\n';
@@ -253,4 +254,34 @@ stopwatch5.Stop();
 results += "Medoid method time elapsed: " + stopwatch2.ElapsedMilliseconds + '\n';
 Console.WriteLine("Medoid method time elapsed: " + stopwatch2.ElapsedMilliseconds);
 
+Stopwatch stopwatch7 = new();
+
+stopwatch7.Start();
+var distances44 = _hamming.FindHammingDistance(detector4.Descriptors, detector4.Descriptors);
+var medoidIndex4 = _medoid.FindMedoidIndex(distances44);
+var medoidDescriptor4 = descriptors4.Row(medoidIndex4).GetRawData();
+var medoidComparationResult = _hamming.FindMedoidMethodVoting(medoids, medoidDescriptor4);
+stopwatch7.Stop();
+Console.WriteLine("Medoid method time elapsed: " + stopwatch7.ElapsedMilliseconds);
+
+index4 = 1;
+Console.WriteLine("///////////////////////////");
+foreach (var item in medoidComparationResult.results)
+{
+    Console.WriteLine($"Mathes 1 image with {index4} etalon: {item}");
+    index4++;
+}
+
+/////////////////////
+var medoidIndex5 = _medoid.FindMedoidIndex(distances55);
+var medoidDescriptor5 = descriptors5.Row(medoidIndex5).GetRawData();
+var medoidComparationResult2 = _hamming.FindMedoidMethodVoting(medoids, medoidDescriptor5);
+index4 = 1;
+Console.WriteLine("///////////////////////////");
+foreach (var item in medoidComparationResult2.results)
+{
+    Console.WriteLine($"Mathes 1 image with {index4} etalon: {item}");
+    index4++;
+}
+/////////////////////
 File.WriteAllText(projectPath + "\\results.txt", results);

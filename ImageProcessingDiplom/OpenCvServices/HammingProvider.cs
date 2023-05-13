@@ -124,5 +124,28 @@ namespace ImageProcessingDiplom.OpenCvServices
 
             return distance;
         }
+
+        public VoteResult FindMedoidMethodVoting(List<byte[]> medoids, byte[] descriptor)
+        {
+            VoteResult results;
+            results.results = new List<int>() { 0, 0, 0 };
+
+            int minDistance = int.MaxValue;
+            int indexOfEtalonToVote = 0;
+            for (int j = 0; j < medoids.Count; ++j)
+            {
+                var distance = FindHammingLenghtForDescriptors(descriptor, medoids[j]);
+                Console.WriteLine($"Distance to {j+1}: {distance}");
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    indexOfEtalonToVote = j;
+                }
+            }
+
+            results.results[indexOfEtalonToVote] += 1;
+
+            return results;
+        }
     }
 }
