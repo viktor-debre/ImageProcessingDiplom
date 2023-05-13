@@ -11,7 +11,7 @@ var serviceProvider = services.AddServices()
     .BuildServiceProvider();
 
 var _hamming = serviceProvider.GetService<HammingProvider>();
-var _manhattan = serviceProvider.GetService<ManhattanDictanceProvider>();
+var _manhattan = serviceProvider.GetService<VotingProvider>();
 var _medoid = serviceProvider.GetService<MedoidFinder>();
 
 

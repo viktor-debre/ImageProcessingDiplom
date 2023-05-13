@@ -1,6 +1,6 @@
 ﻿namespace ImageProcessingDiplom.OpenCvServices
 {
-    public class ManhattanDictanceProvider
+    public class VotingProvider
     {
         private const double THRESHOLD_MATHES = 0.125f;
         private const int BRISK_BYTE_COUNT = 512;
