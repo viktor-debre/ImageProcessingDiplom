@@ -28,12 +28,5 @@
       <FileName>OpenCvServices\VotingProvider.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="ImageProcessingDiplom.OpenCvServices.VoteResult">
-    <Position X="6.25" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
-      <FileName>OpenCvServices\HammingProvider.cs</FileName>
-    </TypeIdentifier>
-  </Struct>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
