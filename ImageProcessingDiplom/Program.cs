@@ -14,8 +14,6 @@ var _hamming = serviceProvider.GetService<HammingProvider>();
 var _manhattan = serviceProvider.GetService<ManhattanDictanceProvider>();
 var _medoid = serviceProvider.GetService<MedoidFinder>();
 
-
-//Program
 string results = "";
 var projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
 var imagePathes = new List<string>
@@ -23,13 +21,11 @@ var imagePathes = new List<string>
    projectPath + "\\Images\\karl1",
    projectPath + "\\Images\\karl2",
    projectPath + "\\Images\\karl3"//,
-   //projectPath + "\\Images\\image4"
 };
 
 BriskDetector detector1 = new BriskDetector(imagePathes[0]);
 BriskDetector detector2 = new BriskDetector(imagePathes[1]);
 BriskDetector detector3 = new BriskDetector(imagePathes[2]);
-//BriskDetector detector4 = new BriskDetector(imagePathes[3]);
 
 var descriptors1 = detector1.Descriptors;
 var descriptors2 = detector2.Descriptors;
@@ -38,25 +34,6 @@ var descriptors3 = detector3.Descriptors;
 Console.WriteLine($"Count on image 1 of founded keypoints: {detector1.Keypoints.ToArray().Length}");
 Console.WriteLine($"Count on image 1 of founded keypoints: {detector2.Keypoints.ToArray().Length}");
 Console.WriteLine($"Count on image 1 of founded keypoints: {detector3.Keypoints.ToArray().Length}");
-//var descriptors4 = detector4.Descriptors;
-
-////Vote etalones
-//Stopwatch stopwatch = Stopwatch.StartNew();
-//List<Mat> etalons = new List<Mat>() { detector1.Descriptors, detector2.Descriptors, detector3.Descriptors };
-//VoteResult voteResult1 = _hamming.VoteEtalon(etalons, detector4.Descriptors);
-
-
-//int index = 1;
-//foreach (var item in voteResult1.results)
-//{
-//    Console.WriteLine($"Mathes 4 image with {index} etalon: {item}");
-//    index++;
-//}
-
-
-//stopwatch.Stop();
-//results += "Voting method time elapsed: " + stopwatch.ElapsedMilliseconds + '\n';
-//Console.WriteLine("Voting method time elapsed: " + stopwatch.ElapsedMilliseconds);
 
 
 Stopwatch stopwatch3 = Stopwatch.StartNew();
