@@ -61,6 +61,7 @@ namespace ImageProcessingDiplom.OpenCvServices
             return results;
         }
 
+
         public VoteResult VoteMedoid(List<byte[]> medoids, Mat descriptors)
         {
             VoteResult results;
