@@ -40,7 +40,7 @@ var descriptors4 = detector4.Descriptors;
 var descriptors5 = detector5.Descriptors;
 
 
-//Vote etalones
+//Vote etalones clasic method
 Stopwatch stopwatch = Stopwatch.StartNew();
 List<Mat> etalons = new() { detector1.Descriptors, detector2.Descriptors, detector3.Descriptors };
 VoteResult voteResult1 = _hamming.VoteEtalon(etalons, detector5.Descriptors);
@@ -52,18 +52,6 @@ foreach (var item in voteResult1.results)
     Console.WriteLine($"Mathes 4 image with {index} etalon: {item}");
     index++;
 }
-
-//VoteResult voteResult2 = _hamming.VoteEtalon(etalons, detector1.Descriptors);
-//index = 1;
-
-//foreach (var item in voteResult2.results)
-//{
-//    Console.WriteLine($"Mathes 1 image with {index} etalon: {item}");
-//    index++;
-//}
-
-
-
 stopwatch.Stop();
 results += "Voting method time elapsed: " + stopwatch.ElapsedMilliseconds + '\n';
 Console.WriteLine("Voting method time elapsed: " + stopwatch.ElapsedMilliseconds);
@@ -147,9 +135,6 @@ Console.WriteLine("min method");
 int minMedoid1 = _medoid.FindMinDistanceForMedoid(distances11, medoidIndex1);
 int minMedoid2 = _medoid.FindMinDistanceForMedoid(distances22, medoidIndex2);
 int minMedoid3 = _medoid.FindMinDistanceForMedoid(distances33, medoidIndex3);
-//int minMedoid1 = _medoid.FindMinDistanceForMedoid(descriptors1.GetRawData(medoidIndex1);
-//int minMedoid2 = _medoid.FindMinDistanceForMedoid(descriptors2.GetRawData(medoidIndex2));
-//int minMedoid3 = _medoid.FindMinDistanceForMedoid(descriptors3.GetRawData(medoidIndex3));
 
 List<int> minMedoidElements = new List<int>() { minMedoid1, minMedoid2, minMedoid3 };
 
