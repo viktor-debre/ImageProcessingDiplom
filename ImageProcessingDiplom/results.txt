@@ -1,0 +1,29 @@
+Voting method with image 4
+Mathes 4 image with 1 etalon: 151
+Mathes 4 image with 2 etalon: 157
+Mathes 4 image with 3 etalon: 115
+Voting method time elapsed for image 4: 10246
+Voting method with image 5
+Mathes 5 image with 1 etalon: 148
+Mathes 5 image with 2 etalon: 316
+Mathes 5 image with 3 etalon: 35
+Voting method time elapsed for image 5: 6961
+Medoid 1 is descriptor number 27
+Medoid 2 is descriptor number 308
+Medoid 3 is descriptor number 29
+Triangle min element method vote results for image 4:
+Mathes 4 image with 1 etalon: 39
+Mathes 4 image with 2 etalon: 367
+Mathes 4 image with 3 etalon: 94
+Triangle min element method vote results for image 5:
+Mathes 5 image with 1 etalon: 17
+Mathes 5 image with 2 etalon: 438
+Mathes 5 image with 3 etalon: 45
+Triangle max element method vote results for image 4:
+Mathes 4 image with 1 etalon: 88
+Mathes 4 image with 2 etalon: 22
+Mathes 4 image with 3 etalon: 390
+Triangle max element method vote results for image 5:
+Mathes 5 image with 1 etalon: 79
+Mathes 5 image with 2 etalon: 25
+Mathes 5 image with 3 etalon: 396
