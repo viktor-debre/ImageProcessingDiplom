@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace ImageProcessingDiplom.OpenCvServices
 {
-    public class BriskDetector
+    public class Detector
     {
         public VectorOfKeyPoint Keypoints { get; set; }
 
@@ -15,7 +15,7 @@ namespace ImageProcessingDiplom.OpenCvServices
 
         private readonly Brisk _detector;
 
-        public BriskDetector(string filePath)
+        public Detector(string filePath)
         {
             Mat image = CvInvoke.Imread(filePath + ".png", ImreadModes.Grayscale);
 

@@ -7,7 +7,7 @@ namespace ImageProcessingDiplom.OpenCvServices
         public List<int> results;
     }
 
-    public class HammingProvider
+    public class Distance
     {
         private const int DESC_NUMBER = 500;
         private const int DESC_SIZE = 512;

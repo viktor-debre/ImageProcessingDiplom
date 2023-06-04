@@ -7,8 +7,8 @@ namespace ImageProcessingDiplom
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddTransient<HammingProvider>();
-            services.AddTransient<ManhattanDictanceProvider>();
+            services.AddTransient<Distance>();
+            services.AddTransient<ThreadholdsMathes>();
 
             return services;
         }

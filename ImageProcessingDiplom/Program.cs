@@ -12,8 +12,8 @@ var services = new ServiceCollection();
 var serviceProvider = services.AddServices()
     .BuildServiceProvider();
 
-var _hamming = serviceProvider.GetService<HammingProvider>();
-var _manhattan = serviceProvider.GetService<ManhattanDictanceProvider>();
+var _distanceService = serviceProvider.GetService<Distance>();
+var _threadholdService = serviceProvider.GetService<ThreadholdsMathes>();
 
 //Program
 string results = "";
@@ -26,9 +26,9 @@ var imagePathes = new List<string>
    //projectPath + "\\Images\\image4"
 };
 
-BriskDetector detector1 = new BriskDetector(imagePathes[0]);
-BriskDetector detector2 = new BriskDetector(imagePathes[1]);
-BriskDetector detector3 = new BriskDetector(imagePathes[2]);
+Detector detector1 = new Detector(imagePathes[0]);
+Detector detector2 = new Detector(imagePathes[1]);
+Detector detector3 = new Detector(imagePathes[2]);
 //BriskDetector detector4 = new BriskDetector(imagePathes[3]);
 
 var descriptors1 = detector1.Descriptors;
@@ -40,7 +40,7 @@ Console.WriteLine($"Count on image 1 of founded keypoints: {detector1.Keypoints.
 Console.WriteLine($"Count on image 1 of founded keypoints: {detector2.Keypoints.ToArray().Length}");
 Console.WriteLine($"Count on image 1 of founded keypoints: {detector3.Keypoints.ToArray().Length}");
 
-Stopwatch stopwatch2 = Stopwatch.StartNew();
+Stopwatch timer1 = Stopwatch.StartNew();
 // distances
 var listDescriptors = new List<Mat>()
 {
@@ -49,10 +49,10 @@ var listDescriptors = new List<Mat>()
     descriptors3
 };
 
-var uniqueNumbers = _hamming.FindUniqueMathesForAllEtalon(listDescriptors);
-stopwatch2.Stop();
+var uniqueNumbers = _distanceService.FindUniqueMathesForAllEtalon(listDescriptors);
+timer1.Stop();
 
-Console.WriteLine("Matrix etalon time elapsed: " + stopwatch2.ElapsedMilliseconds);
+Console.WriteLine("Matrix etalon time elapsed: " + timer1.ElapsedMilliseconds);
 ////////////////////
 //for (int k = 0; k < uniqueNumbers.Count; k++)
 //{
@@ -149,115 +149,113 @@ for (int k = 0; k < uniqueNumbers.Count; k++)
     }
 }
 
-Stopwatch stopwatch3 = Stopwatch.StartNew();
-// distances
-var distances11 = _hamming.FindHammingDistance(detector1.Descriptors, detector1.Descriptors);
-var distances12 = _hamming.FindHammingDistance(detector1.Descriptors, detector2.Descriptors);
-var distances13 = _hamming.FindHammingDistance(detector1.Descriptors, detector3.Descriptors);
-var distances21 = _hamming.FindHammingDistance(detector2.Descriptors, detector1.Descriptors);
-var distances22 = _hamming.FindHammingDistance(detector2.Descriptors, detector2.Descriptors);
-var distances23 = _hamming.FindHammingDistance(detector2.Descriptors, detector3.Descriptors);
-var distances31 = _hamming.FindHammingDistance(detector3.Descriptors, detector1.Descriptors);
-var distances32 = _hamming.FindHammingDistance(detector3.Descriptors, detector2.Descriptors);
-var distances33 = _hamming.FindHammingDistance(detector3.Descriptors, detector3.Descriptors);
-stopwatch3.Stop();
-Console.WriteLine("Matrix etalon time elapsed: " + stopwatch3.ElapsedMilliseconds);
+Stopwatch timer2 = Stopwatch.StartNew();
+var distances11 = _distanceService.FindHammingDistance(detector1.Descriptors, detector1.Descriptors);
+var distances12 = _distanceService.FindHammingDistance(detector1.Descriptors, detector2.Descriptors);
+var distances13 = _distanceService.FindHammingDistance(detector1.Descriptors, detector3.Descriptors);
+var distances21 = _distanceService.FindHammingDistance(detector2.Descriptors, detector1.Descriptors);
+var distances22 = _distanceService.FindHammingDistance(detector2.Descriptors, detector2.Descriptors);
+var distances23 = _distanceService.FindHammingDistance(detector2.Descriptors, detector3.Descriptors);
+var distances31 = _distanceService.FindHammingDistance(detector3.Descriptors, detector1.Descriptors);
+var distances32 = _distanceService.FindHammingDistance(detector3.Descriptors, detector2.Descriptors);
+var distances33 = _distanceService.FindHammingDistance(detector3.Descriptors, detector3.Descriptors);
+timer2.Stop();
+Console.WriteLine("Matrix etalon time elapsed: " + timer2.ElapsedMilliseconds);
 
-var mathes11 = _manhattan.CountThresholdMathes(distances11);
+var mathes11 = _threadholdService.CountThresholdMathes(distances11);
 results += "Mathes 1 with 1: " + mathes11 + '\n';
 Console.WriteLine("Mathes 1 with 1: " + mathes11);
 
-var mathes12 = _manhattan.CountThresholdMathes(distances12);
+var mathes12 = _threadholdService.CountThresholdMathes(distances12);
 results += "Mathes 1 with 2: " + mathes12 + '\n';
 Console.WriteLine("Mathes 1 with 2: " + mathes12);
 
-var mathes13 = _manhattan.CountThresholdMathes(distances13);
+var mathes13 = _threadholdService.CountThresholdMathes(distances13);
 results += "Mathes 1 with 3: " + mathes13 + '\n';
 Console.WriteLine("Mathes 1 with 3: " + mathes13);
 
-var mathes21 = _manhattan.CountThresholdMathes(distances21);
+var mathes21 = _threadholdService.CountThresholdMathes(distances21);
 results += "Mathes 2 with 1: " + mathes21 + '\n';
 Console.WriteLine("Mathes 2 with 1: " + mathes21);
 
-var mathes22 = _manhattan.CountThresholdMathes(distances22);
+var mathes22 = _threadholdService.CountThresholdMathes(distances22);
 results += "Mathes 2 with 2: " + mathes22 + '\n';
 Console.WriteLine("Mathes 2 with 2: " + mathes22);
 
-var mathes23 = _manhattan.CountThresholdMathes(distances23);
+var mathes23 = _threadholdService.CountThresholdMathes(distances23);
 results += "Mathes 2 with 3: " + mathes23 + '\n';
 Console.WriteLine("Mathes 2 with 3: " + mathes23);
 
-var mathes31 = _manhattan.CountThresholdMathes(distances31);
+var mathes31 = _threadholdService.CountThresholdMathes(distances31);
 results += "Mathes 3 with 1: " + mathes31 + '\n';
 Console.WriteLine("Mathes 3 with 1: " + mathes31);
 
-var mathes32 = _manhattan.CountThresholdMathes(distances32);
+var mathes32 = _threadholdService.CountThresholdMathes(distances32);
 results += "Mathes 3 with 2: " + mathes32 + '\n';
 Console.WriteLine("Mathes 3 with 2: " + mathes32);
 
-var mathes33 = _manhattan.CountThresholdMathes(distances33);
+var mathes33 = _threadholdService.CountThresholdMathes(distances33);
 results += "Mathes 3 with 3: " + mathes33 + '\n';
 Console.WriteLine("Mathes 3 with 3: " + mathes33);
 
 
-int[] indexes1 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(0, b[0]));
-int[] indexes2 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(1, b[1]));
-int[] indexes3 = _hamming.GetIndexesOfTop100LeastElements(_hamming.TakeOnlyRow(2, b[2]));
+int[] indexes1 = _distanceService.GetIndexesOfTop100LeastElements(_distanceService.TakeOnlyRow(0, b[0]));
+int[] indexes2 = _distanceService.GetIndexesOfTop100LeastElements(_distanceService.TakeOnlyRow(1, b[1]));
+int[] indexes3 = _distanceService.GetIndexesOfTop100LeastElements(_distanceService.TakeOnlyRow(2, b[2]));
 
 
-Stopwatch stopwatch4 = Stopwatch.StartNew();
+Stopwatch timer3 = Stopwatch.StartNew();
 // distances
-var distances11short = _hamming.FindHammingDistanceWithIndexes(detector1.Descriptors, detector1.Descriptors, indexes1, indexes1);
-var distances12short = _hamming.FindHammingDistanceWithIndexes(detector1.Descriptors, detector2.Descriptors, indexes1, indexes2);
-var distances13short = _hamming.FindHammingDistanceWithIndexes(detector1.Descriptors, detector3.Descriptors, indexes1, indexes3);
-var distances21short = _hamming.FindHammingDistanceWithIndexes(detector2.Descriptors, detector1.Descriptors, indexes2, indexes1);
-var distances22short = _hamming.FindHammingDistanceWithIndexes(detector2.Descriptors, detector2.Descriptors, indexes2, indexes2);
-var distances23short = _hamming.FindHammingDistanceWithIndexes(detector2.Descriptors, detector3.Descriptors, indexes2, indexes3);
-var distances31short = _hamming.FindHammingDistanceWithIndexes(detector3.Descriptors, detector1.Descriptors, indexes3, indexes1);
-var distances32short = _hamming.FindHammingDistanceWithIndexes(detector3.Descriptors, detector2.Descriptors, indexes3, indexes2);
-var distances33short = _hamming.FindHammingDistanceWithIndexes(detector3.Descriptors, detector3.Descriptors, indexes3, indexes3);
-stopwatch4.Stop();
-Console.WriteLine("Matrix etalon time elapsed: " + stopwatch4.ElapsedMilliseconds);
+var distances11short = _distanceService.FindHammingDistanceWithIndexes(detector1.Descriptors, detector1.Descriptors, indexes1, indexes1);
+var distances12short = _distanceService.FindHammingDistanceWithIndexes(detector1.Descriptors, detector2.Descriptors, indexes1, indexes2);
+var distances13short = _distanceService.FindHammingDistanceWithIndexes(detector1.Descriptors, detector3.Descriptors, indexes1, indexes3);
+var distances21short = _distanceService.FindHammingDistanceWithIndexes(detector2.Descriptors, detector1.Descriptors, indexes2, indexes1);
+var distances22short = _distanceService.FindHammingDistanceWithIndexes(detector2.Descriptors, detector2.Descriptors, indexes2, indexes2);
+var distances23short = _distanceService.FindHammingDistanceWithIndexes(detector2.Descriptors, detector3.Descriptors, indexes2, indexes3);
+var distances31short = _distanceService.FindHammingDistanceWithIndexes(detector3.Descriptors, detector1.Descriptors, indexes3, indexes1);
+var distances32short = _distanceService.FindHammingDistanceWithIndexes(detector3.Descriptors, detector2.Descriptors, indexes3, indexes2);
+var distances33short = _distanceService.FindHammingDistanceWithIndexes(detector3.Descriptors, detector3.Descriptors, indexes3, indexes3);
+timer3.Stop();
+Console.WriteLine("Matrix etalon time elapsed: " + timer3.ElapsedMilliseconds);
 
 Console.WriteLine("/////////////////");
 
 Random rnd = new Random();
-var mathes11short = _manhattan.CountThresholdMathes(distances11short);
+var mathes11short = _threadholdService.CountThresholdMathes(distances11short);
 results += "Mathes 1 with 1: " + mathes11short + '\n';
 Console.WriteLine("Mathes 1 with 1: " + mathes11short);
 
-var mathes12short = _manhattan.CountThresholdMathes(distances12short) + rnd.Next(4, 12);
+var mathes12short = _threadholdService.CountThresholdMathes(distances12short) + rnd.Next(4, 12);
 results += "Mathes 1 with 2: " + mathes12short + '\n';
 Console.WriteLine("Mathes 1 with 2: " + mathes12short);
 
-var mathes13short = _manhattan.CountThresholdMathes(distances13short) + rnd.Next(4, 12);
+var mathes13short = _threadholdService.CountThresholdMathes(distances13short) + rnd.Next(4, 12);
 results += "Mathes 1 with 3: " + mathes13short + '\n';
 Console.WriteLine("Mathes 1 with 3: " + mathes13short);
 
-var mathes21short = _manhattan.CountThresholdMathes(distances21short) + rnd.Next(4, 12);
+var mathes21short = _threadholdService.CountThresholdMathes(distances21short) + rnd.Next(4, 12);
 results += "Mathes 2 with 1: " + mathes21short + '\n';
 Console.WriteLine("Mathes 2 with 1: " + mathes21short);
 
-var mathes22short = _manhattan.CountThresholdMathes(distances22short);
+var mathes22short = _threadholdService.CountThresholdMathes(distances22short);
 results += "Mathes 2 with 2: " + mathes22short + '\n';
 Console.WriteLine("Mathes 2 with 2: " + mathes22short);
 
-var mathes23short = _manhattan.CountThresholdMathes(distances23short) + rnd.Next(4, 12);
+var mathes23short = _threadholdService.CountThresholdMathes(distances23short) + rnd.Next(4, 12);
 results += "Mathes 2 with 3: " + mathes23short + '\n';
 Console.WriteLine("Mathes 2 with 3: " + mathes23short);
 
-var mathes31short = _manhattan.CountThresholdMathes(distances31short) + rnd.Next(4, 12);
+var mathes31short = _threadholdService.CountThresholdMathes(distances31short) + rnd.Next(4, 12);
 results += "Mathes 3 with 1: " + mathes31short + '\n';
 Console.WriteLine("Mathes 3 with 1: " + mathes31short);
 
-var mathes32short = _manhattan.CountThresholdMathes(distances32short) + rnd.Next(4, 12);
+var mathes32short = _threadholdService.CountThresholdMathes(distances32short) + rnd.Next(4, 12);
 results += "Mathes 3 with 2: " + mathes32short + '\n';
 Console.WriteLine("Mathes 3 with 2: " + mathes32short);
 
-var mathes33short = _manhattan.CountThresholdMathes(distances33short);
+var mathes33short = _threadholdService.CountThresholdMathes(distances33short);
 results += "Mathes 3 with 3: " + mathes33short + '\n';
 Console.WriteLine("Mathes 3 with 3: " + mathes33short);
-
 
 
 //Console.Write(results);
