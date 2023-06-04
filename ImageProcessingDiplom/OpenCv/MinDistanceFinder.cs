@@ -1,6 +1,6 @@
 ﻿namespace ImageProcessingDiplom.OpenCvServices
 {
-    public class ManhattanDictanceProvider
+    public class MinDistanceFinder
     {
         private const double THRESHOLD_MATHES = 0.25f;
         private const int BRISK_BYTE_COUNT = 512;

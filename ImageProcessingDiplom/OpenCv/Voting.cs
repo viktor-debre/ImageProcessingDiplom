@@ -7,7 +7,7 @@ namespace ImageProcessingDiplom.OpenCvServices
         public List<int> results;
     }
 
-    public class HammingProvider
+    public class Voting
     {
         private const int DESC_NUMBER = 500;
         private const int DESC_SIZE = 512;
