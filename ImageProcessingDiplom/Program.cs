@@ -41,7 +41,6 @@ Console.WriteLine($"Count on image 1 of founded keypoints: {detector2.Keypoints.
 Console.WriteLine($"Count on image 1 of founded keypoints: {detector3.Keypoints.ToArray().Length}");
 
 Stopwatch timer1 = Stopwatch.StartNew();
-// distances
 var listDescriptors = new List<Mat>()
 {
     descriptors1,
@@ -53,19 +52,6 @@ var uniqueNumbers = _distanceService.FindUniqueMathesForAllEtalon(listDescriptor
 timer1.Stop();
 
 Console.WriteLine("Matrix etalon time elapsed: " + timer1.ElapsedMilliseconds);
-////////////////////
-//for (int k = 0; k < uniqueNumbers.Count; k++)
-//{
-//    for (int i = 0; i < listDescriptors.Count; i++)
-//    {
-//        results += $"Repeding value for etalon {k + 1} with etalon {i + 1}\n";
-//        for (int j = 0; j < 500; j++)
-//        {
-//            results += uniqueNumbers[k][i, j] + " ";
-//        }
-//        results += '\n';
-//    }
-//}
 
 List<int[,]> b = new List<int[,]>();
 
