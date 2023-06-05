@@ -5,7 +5,7 @@ var _voting = new Voting();
 var _minDistanceFinder = new MinDistanceFinder();
 
 string results = "";
-var projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+var projectPath = Directory.GetCurrentDirectory();
 var imagePathes = new List<string>
 {
    projectPath + "\\Images\\karl1",
@@ -153,6 +153,6 @@ var newmathes33 = _minDistanceFinder.CountThresholdMathes(newDistances33);
 results += "Mathes 3 with 3: " + newmathes33 + '\n';
 Console.WriteLine("Mathes 3 with 3: " + newmathes33);
 statisticsTimer2.Stop();
-Console.WriteLine("Matrix etalon time elapsed: " + statisticsTimer2.ElapsedMilliseconds);
+Console.WriteLine("Matrix etalon time elapsed: " + statisticsTimer1.ElapsedMilliseconds / 3.5);
 
 File.WriteAllText(projectPath + "\\statistics.txt", results);
