@@ -51,7 +51,7 @@ var listDescriptors = new List<Mat>()
 var uniqueNumbers = _distanceService.FindUniqueMathesForAllEtalon(listDescriptors);
 timer1.Stop();
 
-Console.WriteLine("Matrix etalon time elapsed: " + timer1.ElapsedMilliseconds);
+//Console.WriteLine("Matrix etalon time elapsed: " + timer1.ElapsedMilliseconds);
 
 List<int[,]> b = new List<int[,]>();
 
