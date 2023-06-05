@@ -71,6 +71,7 @@ var mathes33 = _minDistanceFinder.CountThresholdMathes(distances33);
 results += "Mathes 3 with 3: " + mathes33 + '\n';
 Console.WriteLine("Mathes 3 with 3: " + mathes33);
 
+Stopwatch statisticsTimer2 = Stopwatch.StartNew();
 
 var v1 = _minDistanceFinder.FindMinimumV(distances11, distances12, distances13);
 var v2 = _minDistanceFinder.FindMinimumV(distances22 ,distances21, distances23);
@@ -151,5 +152,7 @@ Console.WriteLine("Mathes 3 with 2: " + newmathes32);
 var newmathes33 = _minDistanceFinder.CountThresholdMathes(newDistances33);
 results += "Mathes 3 with 3: " + newmathes33 + '\n';
 Console.WriteLine("Mathes 3 with 3: " + newmathes33);
+statisticsTimer2.Stop();
+Console.WriteLine("Matrix etalon time elapsed: " + statisticsTimer2.ElapsedMilliseconds);
 
 File.WriteAllText(projectPath + "\\statistics.txt", results);
