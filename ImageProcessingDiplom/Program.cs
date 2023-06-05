@@ -153,6 +153,6 @@ var newmathes33 = _minDistanceFinder.CountThresholdMathes(newDistances33);
 results += "Mathes 3 with 3: " + newmathes33 + '\n';
 Console.WriteLine("Mathes 3 with 3: " + newmathes33);
 statisticsTimer2.Stop();
-Console.WriteLine("Matrix etalon time elapsed: " + (int)statisticsTimer1.ElapsedMilliseconds / 3.5);
+Console.WriteLine("Matrix etalon time elapsed: " + (int)(statisticsTimer1.ElapsedMilliseconds / 3.5));
 
 File.WriteAllText(projectPath + "\\statistics.txt", results);
