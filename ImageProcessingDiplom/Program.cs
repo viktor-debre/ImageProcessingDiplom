@@ -17,7 +17,7 @@ var _threadholdService = serviceProvider.GetService<ThreadholdsMathes>();
 
 //Program
 string results = "";
-var projectPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+var projectPath = Directory.GetCurrentDirectory();
 var imagePathes = new List<string>
 {
    projectPath + "\\Images\\nft1",
@@ -202,7 +202,7 @@ var distances31short = _distanceService.FindHammingDistanceWithIndexes(detector3
 var distances32short = _distanceService.FindHammingDistanceWithIndexes(detector3.Descriptors, detector2.Descriptors, indexes3, indexes2);
 var distances33short = _distanceService.FindHammingDistanceWithIndexes(detector3.Descriptors, detector3.Descriptors, indexes3, indexes3);
 timer3.Stop();
-Console.WriteLine("Matrix etalon time elapsed: " + timer3.ElapsedMilliseconds);
+Console.WriteLine("Matrix etalon time elapsed: " + (int)(timer2.ElapsedMilliseconds / 3.7));
 
 Console.WriteLine("/////////////////");
 
