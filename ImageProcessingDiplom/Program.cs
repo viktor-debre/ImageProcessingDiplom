@@ -37,8 +37,8 @@ var descriptors3 = detector3.Descriptors;
 //var descriptors4 = detector4.Descriptors;
 
 Console.WriteLine($"Count on image 1 of founded keypoints: {detector1.Keypoints.ToArray().Length}");
-Console.WriteLine($"Count on image 1 of founded keypoints: {detector2.Keypoints.ToArray().Length}");
-Console.WriteLine($"Count on image 1 of founded keypoints: {detector3.Keypoints.ToArray().Length}");
+Console.WriteLine($"Count on image 2 of founded keypoints: {detector2.Keypoints.ToArray().Length}");
+Console.WriteLine($"Count on image 3 of founded keypoints: {detector3.Keypoints.ToArray().Length}");
 
 Stopwatch timer1 = Stopwatch.StartNew();
 var listDescriptors = new List<Mat>()
